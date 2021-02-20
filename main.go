@@ -41,6 +41,7 @@ func (s *Summary) Print() {
 var pipe = make(chan string, runtime.NumCPU())
 var wg sync.WaitGroup
 
+//readed
 func main() {
 	s := &Summary{}
 
@@ -90,10 +91,10 @@ func worker(s *Summary) {
 			if strings.TrimSpace(line) == DELI {
 				if readed {
 					readed = false
+					atomic.AddInt64(&s.readLines, 1)
 				} else {
 					readed = true
 				}
-				atomic.AddInt64(&s.readLines, 1)
 			}
 
 			if readed {
