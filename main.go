@@ -17,7 +17,7 @@ import (
 const (
 	COLOR_NORMAL = "\033[0m"
 	COLOR_RED    = "\033[1;33m"
-	DELI         = "//foolishway"
+	DELI         = "//readed"
 )
 
 func Red(content string) string {
@@ -34,7 +34,7 @@ func (s *Summary) Print() {
 	fmt.Fprintf(os.Stdout, "total %s lines;\nreaded %s lines;\nprogress: %s\n",
 		Red(strconv.FormatInt(s.totalLines, 10)),
 		Red(strconv.FormatInt(s.readLines, 10)),
-		Red(fmt.Sprintf("%d", int(s.progress*100))+"%"),
+		Red(fmt.Sprintf("%0.2f", float32(s.progress*100))+"%"),
 	)
 }
 
@@ -72,6 +72,7 @@ func main() {
 	s.Print()
 }
 
+//foolishway
 func worker(s *Summary) {
 	for path := range pipe {
 		f, err := os.Open(path)
