@@ -77,6 +77,8 @@ func main() {
 func worker(s *Summary) {
 	for path := range pipe {
 		f, err := os.Open(path)
+		defer f.Close()
+
 		if err != nil {
 			log.Printf("Read %s error: %v", path, err)
 			continue
